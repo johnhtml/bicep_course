@@ -3,9 +3,10 @@ param appServicePlanName string
 param skuName string
 param skuTier string
 param skuCapacity int
-param appInsightsName string
-param appInsightsRetentionInDays int
+
 param webAppName string
+param appInsightsInstrumentationKey string
+param appInsightsConnectionString string
 
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
@@ -34,15 +35,6 @@ resource appServicePlan2 'Microsoft.Web/serverfarms@2020-12-01' = {
 }
 */
 
-resource appInsightsComponents 'Microsoft.Insights/components@2020-02-02' = {
-  name: appInsightsName
-  location: location
-  kind: 'web'
-  properties: {
-    Application_Type: 'web'
-    RetentionInDays: appInsightsRetentionInDays
-  }
-}
 
 
 
@@ -65,7 +57,7 @@ resource webApplicationSettings 'Microsoft.Web/sites/config@2020-12-01' = {
     appSettings: [
       {
         name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-        value: appInsightsComponents.properties.InstrumentationKey
+        value: appInsightsInstrumentationKey
       }
       {
         name: 'APPINSIGHTS_PROFILERFEATURE_VERSION'
@@ -77,15 +69,15 @@ resource webApplicationSettings 'Microsoft.Web/sites/config@2020-12-01' = {
       }
       {
         name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-        value: appInsightsComponents.properties.ConnectionString
+        value: appInsightsConnectionString
       }
       {
         name: 'AzureWebJobsDashboard'
-        value: appInsightsComponents.properties.ConnectionString
+        value: appInsightsConnectionString
       }
       {
         name: 'AzureWebJobsInstrumentationKey'
-        value: appInsightsComponents.properties.InstrumentationKey
+        value: appInsightsInstrumentationKey
       }
       {
         name: 'WEBSITE_APPLICATIONINSIGHTS_LIVEMETRICS_ENABLED'

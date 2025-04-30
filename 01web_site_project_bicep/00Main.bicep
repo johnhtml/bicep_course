@@ -19,8 +19,8 @@ module AppServicePlan '02AppServicePlant.bicep' = {
     skuName: skuName
     skuTier: skuTier
     skuCapacity: skuCapacity
-    appInsightsName: appInsightsName
-    appInsightsRetentionInDays: appInsightsRetentionInDays
+    appInsightsInstrumentationKey: AppInsights.outputs.appInsightsInstrumentationKey
+    appInsightsConnectionString: AppInsights.outputs.appInsightsConnectionString
     webAppName: webAppName
   }
 }
@@ -34,3 +34,11 @@ module SQLdatabase '03SQLdatabase.bicep' = {
   }
 }
 
+module AppInsights '04AppInsights.bicep' = {
+  name: 'AppInsights'
+  params:{
+    appInsightsName: appInsightsName
+    appInsightsRetentionInDays: appInsightsRetentionInDays
+    location: location
+  }
+}
