@@ -1,6 +1,10 @@
+param pSqlServerName string
+param pSqlDBName string = 'sql-server-bicep-test-998987987'
+param location string
+
 resource sqlServer 'Microsoft.Sql/servers@2014-04-01' ={
-  name: 'sql-server-bicep-test-998987987'
-  location: resourceGroup().location
+  name: pSqlServerName
+  location: location
   properties: {
     administratorLogin: 'sqladmin'
     administratorLoginPassword: 'password@123'
@@ -20,8 +24,8 @@ resource sqlServerFirewallRules 'Microsoft.Sql/servers/firewallRules@2021-02-01-
 
 resource sqlServerDatabase 'Microsoft.Sql/servers/databases@2014-04-01' = {
   parent: sqlServer
-  name: 'name'
-  location: resourceGroup().location
+  name: pSqlDBName
+  location: location
   properties: {
     collation: 'SQL_Latin1_General_CP1_CI_AS'
     edition: 'Basic'

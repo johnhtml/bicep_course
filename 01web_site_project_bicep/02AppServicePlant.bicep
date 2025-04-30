@@ -1,10 +1,20 @@
+param location string
+param appServicePlanName string
+param skuName string
+param skuTier string
+param skuCapacity int
+param appInsightsName string
+param appInsightsRetentionInDays int
+param webAppName string
+
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
-  name: 'app-service-plan-bicep-test'
-  location: resourceGroup().location
+  name: appServicePlanName
+  location: location
   sku: {
-    name: 'F1'
-    tier: 'Free'
-    capacity: 1
+    name: skuName
+    tier: skuTier
+    capacity: skuCapacity
   }
 }
 
@@ -15,30 +25,30 @@ resource appServicePlan2 'Microsoft.Web/serverfarms@2020-12-01' = {
   properties: {
     reserved: true
   }
-  location: 'eastus'
+  location: location
   sku: {
     name: 'f1'
     tier: 'Free'
-    capacity: 1
+    capacity: skuCapacity
   }
 }
 */
 
 resource appInsightsComponents 'Microsoft.Insights/components@2020-02-02' = {
-  name: 'app-insights-bicep-test'
-  location: resourceGroup().location
+  name: appInsightsName
+  location: location
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 60
+    RetentionInDays: appInsightsRetentionInDays
   }
 }
 
 
 
 resource webApplication 'Microsoft.Web/sites@2020-12-01' = {
-  name: 'webapp-bicep-test'
-  location: resourceGroup().location
+  name: webAppName
+  location: location
   kind: 'app'
   properties: {
     serverFarmId: appServicePlan.id
