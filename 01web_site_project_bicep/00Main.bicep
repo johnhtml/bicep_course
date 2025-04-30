@@ -1,14 +1,14 @@
-param location string = resourceGroup().location
-param appServicePlanName string = 'app-service-plan-bicep-test'
-param skuName string = 'F1'
-param skuTier string = 'Free'
-param skuCapacity int = 1
-param appInsightsName string = 'app-insights-bicep-test'
-param appInsightsRetentionInDays int = 60
-param webAppName string = 'webapp-bicep-test'
+param location string
+param appServicePlanName string
+param skuName string
+param skuTier string
+param skuCapacity int
+param appInsightsName string
+param appInsightsRetentionInDays int
+param webAppName string
 
-param pSqlServerName string = 'sql-server-bicep-test-998987987'
-param pSqlDBName string = 'sql-server-bicep-test-998987987'
+param pSqlServerName string
+param pSqlDBName string
 
 
 module AppServicePlan '02AppServicePlant.bicep' = {
