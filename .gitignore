@@ -1,0 +1,17 @@
+# Bicep cache files
+.bicep/
+
+# Azure Resource Manager deployment files
+*.json
+*.jsonc
+
+# Local environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
