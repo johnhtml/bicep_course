@@ -10,6 +10,9 @@ param webAppName string
 param pSqlServerName string
 param pSqlDBName string
 
+param administratorLogin string
+@secure()
+param administratorLoginPassword string
 
 module AppServicePlan '02AppServicePlant.bicep' = {
   name: 'AppServicePlan'
@@ -31,6 +34,8 @@ module SQLdatabase '03SQLdatabase.bicep' = {
     pSqlServerName: pSqlServerName
     pSqlDBName: pSqlDBName
     location: location
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
   }
 }
 

@@ -2,12 +2,16 @@ param pSqlServerName string
 param pSqlDBName string = 'sql-server-bicep-test-998987987'
 param location string
 
+param administratorLogin string
+@secure()
+param administratorLoginPassword string
+
 resource sqlServer 'Microsoft.Sql/servers@2014-04-01' ={
   name: pSqlServerName
   location: location
   properties: {
-    administratorLogin: 'sqladmin'
-    administratorLoginPassword: 'password@123'
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
   }
 }
 
