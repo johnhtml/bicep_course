@@ -8,9 +8,10 @@ Please select the SKU name for the App Service Plan.
 - B2: Basic
 - B3: Basic
 - S1: Standard
+- S2: Standard
 ''')
-@allowed(['F1', 'B1', 'B2', 'B3', 'S1'])
-param skuName string = (environment != 'prd') ? 'B1' : 'S1'
+@allowed(['F1', 'B1', 'B2', 'B3', 'S1', 'S2'])
+param skuName string = (environment != 'prd') ? 'S1' : 'S2'
 param skuTier string
 @minValue(1)
 @maxValue(3)
@@ -44,6 +45,7 @@ module AppServicePlan '02AppServicePlant.bicep' = {
     appInsightsInstrumentationKey: AppInsights.outputs.appInsightsInstrumentationKey
     appInsightsConnectionString: AppInsights.outputs.appInsightsConnectionString
     webAppName: webAppName
+    environment: environment
   }
 }
 

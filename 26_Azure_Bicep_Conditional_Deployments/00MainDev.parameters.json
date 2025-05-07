@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "appServicePlanName": {
+            "value": "app-service-plan-bicep-test-dev"
+        },
+        "skuName": {
+            "value": "F1"
+        },
+        "skuTier": {
+            "value": "Free"
+        },
+        "skuCapacity": {
+            "value": 1
+        },
+        "appInsightsName": {
+            "value": "app-insights-bicep-test-dev"
+        },
+        "appInsightsRetentionInDays": {
+            "value": 60
+        },
+        "webAppName": {
+            "value": "webapp-bicep-test-dev"
+        },
+        "pSqlServerName": {
+            "value": "sql-server-bicep-test-dev-998987987"
+        },
+        "pSqlDBName": {
+            "value": "sql-db-bicep-test-dev-998987987"
+        },
+        "administratorLogin": {
+            "value": "sqladmin"
+        },
+        "keyvaultName": {
+            "value": "kv-rg-bicep-test"
+        },
+        "environment": {
+            "value": "dev"
+        }
+    }
+}
