@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "appServicePlanName": {
+            "value": "app-service-plan-bicep-test-stg"
+        },
+        "skuName": {
+            "value": "F1"
+        },
+        "skuTier": {
+            "value": "Free"
+        },
+        "skuCapacity": {
+            "value": 1
+        },
+        "appInsightsName": {
+            "value": "app-insights-bicep-test-stg"
+        },
+        "appInsightsRetentionInDays": {
+            "value": 60
+        },
+        "webAppName": {
+            "value": "webapp-bicep-test-stg"
+        },
+        "pSqlServerName": {
+            "value": "sql-server-bicep-test-stg-998987987"
+        },
+        "pSqlDBName": {
+            "value": "sql-db-bicep-test-stg-998987987"
+        },
+        "administratorLogin": {
+            "value": "sqladmin"
+        },
+        "administratorLoginPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/your-subscription-id/resourceGroups/your-resource-group/providers/Microsoft.KeyVault/vaults/your-key-vault-name"
+                },
+                "secretName": "your-secret-name"
+            }
+        }
+    }
+}

@@ -1,8 +1,17 @@
 param location string
 param appServicePlanName string
+@description(''''
+Please select the SKU name for the App Service Plan.
+- F1: Free
+- B1: Basic
+- B2: Basic
+- B3: Basic
+''')
 @allowed(['F1', 'B1', 'B2', 'B3'])
 param skuName string
 param skuTier string
+@minValue(1)
+@maxValue(3)
 param skuCapacity int
 param appInsightsName string
 param appInsightsRetentionInDays int

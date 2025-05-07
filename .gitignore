@@ -2,7 +2,7 @@
 .bicep/
 
 # Azure Resource Manager deployment files
-*.json
+#*.json
 *.jsonc
 
 # Local environment files

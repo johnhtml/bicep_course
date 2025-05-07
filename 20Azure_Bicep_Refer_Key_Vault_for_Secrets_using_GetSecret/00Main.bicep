@@ -1,6 +1,6 @@
 param location string
 param appServicePlanName string
-@allowed(['F1', 'B1', 'B2', 'B3'])
+
 param skuName string
 param skuTier string
 param skuCapacity int
