@@ -94,3 +94,7 @@ az deployment group create -g rg-bicep-prd-test -f 00Main.bicep -p 00MainPrd.par
 
 echo Despliegues completados.
 pause
+
+
+para desplegar en modo debug
+az deployment group create -g rg-bicep-dev -f 00Main.bicep -p 00Main.parameters.json --debug
