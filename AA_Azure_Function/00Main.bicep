@@ -22,6 +22,7 @@ param appInsightsRetentionInDays int
 param functionAppName string
 param storageAccountName string
 param cosmosDbAccountName string
+param tableName string
 
 module StorageAccount '03StorageAccount.bicep' = {
   name: 'StorageAccount'
@@ -45,6 +46,7 @@ module AppServicePlan '02AppServicePlan.bicep' = {
     environment: environment
     storageAccountName: storageAccountName
     storageAccountId: StorageAccount.outputs.storageAccountId
+    tableName: tableName
   }
 }
 
@@ -62,6 +64,14 @@ module CosmosDB '05CosmosDB.bicep' = {
   params:{
     cosmosDbAccountName: cosmosDbAccountName
     location: locationCosmosDB
+    functionAppPrincipalId: AppServicePlan.outputs.functionAppPrincipalId
+  }
+}
+
+module ManagedIdentityStorage '06ManagedIdentityFunAppStorage.bicep' = {
+  name: 'ManagedIdentityStorage'
+  params: {
+    storageAccountName: StorageAccount.outputs.storageAccountName
     functionAppPrincipalId: AppServicePlan.outputs.functionAppPrincipalId
   }
 }

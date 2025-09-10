@@ -9,6 +9,7 @@ param functionAppName string
 param environment string
 param storageAccountName string
 param storageAccountId string
+param tableName string
 
 
 var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${listKeys(storageAccountId, '2022-09-01').keys[0].value};EndpointSuffix=core.windows.net'
@@ -35,7 +36,7 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
     serverFarmId: appServicePlan.id
     httpsOnly: true
     siteConfig: {
-      linuxFxVersion: 'PYTHON|3.11'
+      linuxFxVersion: 'PYTHON|3.12'
       appSettings: [
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -64,6 +65,10 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'AZURE_FUNCTIONS_ENVIRONMENT'
           value: environment
+        }
+        {
+          name: 'TABLE_NAME'
+          value: tableName
         }
       ]
     }

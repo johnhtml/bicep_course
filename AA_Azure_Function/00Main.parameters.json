@@ -37,6 +37,9 @@
         },
         "cosmosDbAccountName": {
             "value": "cosmosdb-bicep-998987989"
+        },
+        "tableName": {
+            "value": "myentities"
         }
     }
 }
