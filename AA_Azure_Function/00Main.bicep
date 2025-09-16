@@ -23,6 +23,7 @@ param functionAppName string
 param storageAccountName string
 param cosmosDbAccountName string
 param tableName string
+param keyVaultName string
 
 module StorageAccount '03StorageAccount.bicep' = {
   name: 'StorageAccount'
@@ -76,5 +77,15 @@ module ManagedIdentityStorage '06ManagedIdentityFunAppStorage.bicep' = {
   }
 }
 
+module KeyVault '07keyVault.bicep' = {
+  name: 'KeyVault'
+  params: {
+    location: location
+    keyVaultName: keyVaultName
+    functionAppPrincipalId: AppServicePlan.outputs.functionAppPrincipalId
+  }
+}
+
 output functionAppName string = AppServicePlan.outputs.functionAppName
 output storageAccountName string = StorageAccount.outputs.storageAccountName
+output keyVaultUri string = KeyVault.outputs.keyVaultUri

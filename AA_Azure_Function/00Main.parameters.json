@@ -40,6 +40,9 @@
         },
         "tableName": {
             "value": "myentities"
+        },
+        "keyVaultName": {
+            "value": "functionappkv998987988"
         }
     }
 }
