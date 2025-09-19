@@ -33,3 +33,6 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     principalType: 'ServicePrincipal'
   }
 }
+
+output cosmosDbAccountEndpoint string = cosmosDbAccount.properties.documentEndpoint
+output cosmosDbAccountId string = cosmosDbAccount.id

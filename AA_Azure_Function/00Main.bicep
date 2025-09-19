@@ -86,16 +86,16 @@ module KeyVault '07keyVault.bicep' = {
   }
 }
 
-module AppConfiguration '08AppConfiguration.bicep' = {
-  name: 'AppConfiguration'
-  params: {
-    location: location
-    appConfigName: '${environment}appconfig${uniqueString(resourceGroup().id)}'
-    functionAppPrincipalId: AppServicePlan.outputs.functionAppPrincipalId
-  }
-}
+// module AppConfiguration '08AppConfiguration.bicep' = {
+//   name: 'AppConfiguration'
+//   params: {
+//     location: location
+//     appConfigName: '${environment}appconfig${uniqueString(resourceGroup().id)}'
+//     functionAppPrincipalId: AppServicePlan.outputs.functionAppPrincipalId
+//   }
+// }
 
 output functionAppName string = AppServicePlan.outputs.functionAppName
 output storageAccountName string = StorageAccount.outputs.storageAccountName
 output keyVaultUri string = KeyVault.outputs.keyVaultUri
-output appConfigEndpoint string = AppConfiguration.outputs.appConfigEndpoint
+//output appConfigEndpoint string = AppConfiguration.outputs.appConfigEndpoint
