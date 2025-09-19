@@ -1,7 +1,11 @@
 param cosmosDbAccountName string
 param location string
 param functionAppPrincipalId string
-param roleDefinitionId string = 'b24988ac-6180-42a0-ab88-20f7382dd24c'
+@allowed([
+  '00000000-0000-0000-0000-000000000001' // Built-in Data Reader
+  '00000000-0000-0000-0000-000000000002' // Built-in Data Contributor
+])
+param cosmosDbRoleDefinitionId string = '00000000-0000-0000-0000-000000000002'
 
 resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-09-15' = {
   name: cosmosDbAccountName
@@ -23,14 +27,13 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-09-15' = {
   }
 }
 
-
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(cosmosDbAccount.id, functionAppPrincipalId, roleDefinitionId)
-  scope: cosmosDbAccount
+resource sqlRoleAssignment 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2023-09-15' = {
+  name: guid(cosmosDbRoleDefinitionId, functionAppPrincipalId, cosmosDbAccount.id)
+  parent: cosmosDbAccount
   properties: {
     principalId: functionAppPrincipalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
-    principalType: 'ServicePrincipal'
+    roleDefinitionId: '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosDbAccount.name}/sqlRoleDefinitions/${cosmosDbRoleDefinitionId}'
+    scope: cosmosDbAccount.id
   }
 }
 
